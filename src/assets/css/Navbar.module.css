@@ -1,0 +1,11 @@
+.navbarContainer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 60px;
+    background-color: red;
+}
+.toggleMode{
+    display: flex;
+    justify-content: flex-start;
+}
