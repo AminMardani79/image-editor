@@ -1,18 +1,16 @@
 import React from "react";
 
-// styles
-import styles from "../assets/css/Content.module.css";
-
 // components
 import Picture from "./Picture";
 import Settings from "./Settings";
+import { ContentContainer, BgImage } from "./Elements/ContentElements";
 
 const Content = () => {
   return (
-    <div className={styles.contentContainer}>
+    <ContentContainer>
       <Picture />
       <Settings />
-    </div>
+    </ContentContainer>
   );
 };
 

@@ -1,11 +1,33 @@
+@import 'Config.css';
 .navbarContainer{
     display: flex;
     justify-content: space-around;
     align-items: center;
     height: 60px;
-    background-color: red;
+    background-color: var(--main-bg);
 }
 .toggleMode{
     display: flex;
     justify-content: flex-start;
+}
+.navbarTitle{
+    color:var(--main-black);
+}
+.navbarTitle span{
+    font-size: 12px;
+    margin-top: 8px;
+    font-weight: 300;
+    display: inline-block;
+    color:var(--main-black);
+}
+.toggleMode .modeTitle span{
+    font-weight: 700;
+    font-size: 15px;
+    display: inline-block;
+    margin-right: 5px;
+}
+.toggleMode .modeIcons{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
 }
