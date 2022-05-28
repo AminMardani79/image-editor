@@ -1,16 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 // styles
 import styles from "../assets/css/Navbar.module.css";
 // components
-import { ToggleOff, ToggleOn } from "./Elements/NavbarElements";
+import {
+  ToggleOff,
+  ToggleOn,
+  NavbarContainer,
+} from "./Elements/NavbarElements";
+// context
+import { LightModeContext } from "../context/LightModeContextProvider";
 
 const Navbar = () => {
-  const [lightMode, setLightMode] = useState(true);
+  const { lightMode, setLightMode } = useContext(LightModeContext);
   const toggleHandler = () => {
     setLightMode((prev) => !prev);
   };
   return (
-    <div className={styles.navbarContainer}>
+    <NavbarContainer className={styles.navbarContainer} lightMode={lightMode}>
       <h2 className={styles.navbarTitle}>
         Image Editor <span>By Amin Mardani</span>
       </h2>
@@ -22,7 +28,7 @@ const Navbar = () => {
           {lightMode ? <ToggleOn /> : <ToggleOff />}
         </div>
       </div>
-    </div>
+    </NavbarContainer>
   );
 };
 

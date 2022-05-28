@@ -1,12 +1,16 @@
 // components
 import Navbar from "./components/Navbar";
 import Content from "./components/Content";
+// context
+import LightModeContextProvider from "./context/LightModeContextProvider";
 function App() {
   return (
-    <div className="App">
-      <Navbar />
-      <Content />
-    </div>
+    <LightModeContextProvider>
+      <div className="App">
+        <Navbar />
+        <Content />
+      </div>
+    </LightModeContextProvider>
   );
 }
 

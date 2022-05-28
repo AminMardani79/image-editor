@@ -1,6 +1,1 @@
 @import 'Config.css';
-.pictureContainer{
-    background-color: var(--main-bg);
-    height:100%;
-    border-radius: 7px;
-}

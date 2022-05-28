@@ -26,6 +26,10 @@
     display: inline-block;
     margin-right: 5px;
 }
+.toggleMode .modeTitle{
+    display: flex;
+    align-items: center;
+}
 .toggleMode .modeIcons{
     display: flex;
     align-items: center;
