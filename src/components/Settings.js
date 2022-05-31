@@ -2,7 +2,11 @@ import React, { useContext } from "react";
 // styles
 import styles from "../assets/css/Settings.module.css";
 // components
-import { SettingContainer, SettingsIcon } from "./Elements/SettingElements";
+import {
+  SettingContainer,
+  SettingsIcon,
+  MirrorIcon,
+} from "./Elements/SettingElements";
 import Adjusment from "./Adjusment";
 // context
 import { LightModeContext } from "../context/LightModeContextProvider";
@@ -22,8 +26,7 @@ const Settings = () => {
           <span>10 %</span>
         </div>
         <div className={styles.mirror}>
-          <i></i>
-          <i></i>
+          <MirrorIcon />
         </div>
       </div>
       <Adjusment />

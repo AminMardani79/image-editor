@@ -1,15 +1,14 @@
 // components
-import Navbar from "./components/Navbar";
-import Content from "./components/Content";
+import AppComponent from "./components/AppComponent";
 // context
 import LightModeContextProvider from "./context/LightModeContextProvider";
+import AdjusmentContextProvider from "./context/AdjusmentContextProvider";
 function App() {
   return (
     <LightModeContextProvider>
-      <div className="App">
-        <Navbar />
-        <Content />
-      </div>
+      <AdjusmentContextProvider>
+        <AppComponent />
+      </AdjusmentContextProvider>
     </LightModeContextProvider>
   );
 }
