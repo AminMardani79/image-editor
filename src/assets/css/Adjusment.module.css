@@ -1,10 +1,6 @@
 @import 'Config.css';
-.settingsContainer{
-    padding: 40px 30px;
-    height: 675px;
-    overflow-y: auto;
-}
-.topSettings{
+
+.adjusments{
     padding: 30px 0;
     border-top: 1px solid var(--mian-black);
     display: flex;
@@ -13,11 +9,7 @@
     align-items: center;
     position: relative;
 }
-.topSettings input{
+
+.adjusments input{
     width: 100%;
-}
-.topSettings .radius{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }

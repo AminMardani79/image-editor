@@ -4,7 +4,7 @@ import lightModeBg from "../../assets/images/colorBg.jpg";
 export const ContentContainer = styled.div`
   display: grid;
   grid-template-columns: 70% 1fr;
-  align-items: center;
+  align-items: flex-start;
   height: calc(100vh - 60px);
   gap: 10px;
   position: relative;

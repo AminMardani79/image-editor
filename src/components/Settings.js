@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 // styles
 import styles from "../assets/css/Settings.module.css";
 // components
-import { SettingContainer } from "./Elements/SettingElements";
+import { SettingContainer, SettingsIcon } from "./Elements/SettingElements";
+import Adjusment from "./Adjusment";
 // context
 import { LightModeContext } from "../context/LightModeContextProvider";
 
@@ -13,7 +14,19 @@ const Settings = () => {
       className={styles.settingsContainer}
       lightMode={lightMode}
     >
-      Setting
+      <div className={styles.topSettings}>
+        <SettingsIcon />
+        <div className={styles.radius}>
+          <span>name</span>
+          <input type="range" min="0" max="100" />
+          <span>10 %</span>
+        </div>
+        <div className={styles.mirror}>
+          <i></i>
+          <i></i>
+        </div>
+      </div>
+      <Adjusment />
     </SettingContainer>
   );
 };
