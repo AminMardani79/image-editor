@@ -1,13 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 // styles
 import styles from "../assets/css/AdjusItem.module.css";
+// context
+import { AdjusmentContext } from "../context/AdjusmentContextProvider";
 
-const AdjusmentItem = () => {
+const AdjusmentItem = ({ state }) => {
+  const { dispatch } = useContext(AdjusmentContext);
+  const { id, name, value, min, max } = state;
+  const changeHandler = (event) => {
+    dispatch({ id, value: event.target.value });
+  };
   return (
     <div className={styles.adjusmentsItem}>
-      <span>name</span>
-      <input type="range" min="0" max="100" />
-      <span>10 %</span>
+      <span>{name}</span>
+      <input
+        type="range"
+        min={min}
+        max={max}
+        value={value}
+        onChange={changeHandler}
+      />
+      <span>{value} %</span>
     </div>
   );
 };

@@ -5,11 +5,8 @@ import { MdOutlineToggleOn } from "react-icons/md";
 import { MdToggleOff } from "react-icons/md";
 
 export const NavbarContainer = styled.div`
-  background: ${(props) => !props.lightMode && "rgb(69,0,28)"};
   background: ${(props) =>
-    props.lightMode
-      ? "var(--main-bg)"
-      : `linear-gradient(31deg, rgba(69,0,28,1) 14%, rgba(9,6,56,1) 90%)`};
+    props.lightMode ? "var(--main-bg)" : `rgba(0,0,0,.8)`};
   color: ${(props) => (props.lightMode ? "#2d2d2d" : "#ffffff")};
 `;
 

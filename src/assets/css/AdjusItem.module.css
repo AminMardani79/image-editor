@@ -1,6 +1,10 @@
 .adjusmentsItem{
-    padding-bottom: 40px;
+    padding-bottom: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.adjusmentsItem input{
+    margin: 10px 0;
+    display: inline-block;
 }
