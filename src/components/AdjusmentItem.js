@@ -8,7 +8,7 @@ const AdjusmentItem = ({ state }) => {
   const { dispatch } = useContext(AdjusmentContext);
   const { id, name, value, min, max } = state;
   const changeHandler = (event) => {
-    dispatch({ id, value: event.target.value });
+    dispatch({ type: "ADJUSMENT", payload: { id, value: event.target.value } });
   };
   return (
     <div className={styles.adjusmentsItem}>

@@ -12,7 +12,7 @@ const Adjusment = () => {
   return (
     <div className={styles.adjusments}>
       <AdjusmentIcon />
-      {state.map((item) => {
+      {state.adjusments.map((item) => {
         return <AdjusmentItem key={item.id} state={item} />;
       })}
     </div>
