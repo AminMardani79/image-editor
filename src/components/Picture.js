@@ -6,6 +6,9 @@ import {
   PictureContainer,
   Options,
   PictureLoader,
+  DownLoad,
+  Delete,
+  Insert,
 } from "./Elements/PictureElements";
 // context
 import { LightModeContext } from "../context/LightModeContextProvider";
@@ -14,8 +17,14 @@ const Picture = () => {
   const { lightMode } = useContext(LightModeContext);
   return (
     <PictureContainer className={styles.pictureContainer} lightMode={lightMode}>
-      <PictureLoader>Loader</PictureLoader>
-      <Options>Options</Options>
+      <PictureLoader></PictureLoader>
+      <Options>
+        <div className={styles.optionsContainer}>
+          <Insert lightMode={lightMode} />
+          <DownLoad lightMode={lightMode} />
+          <Delete lightMode={lightMode} />
+        </div>
+      </Options>
     </PictureContainer>
   );
 };

@@ -24,7 +24,7 @@ const Settings = () => {
       lightMode={lightMode}
     >
       <div className={styles.topSettings}>
-        <SettingsIcon />
+        <SettingsIcon lightMode={lightMode} />
         <div className={styles.radius}>
           <span>{state.radius.name}</span>
           <input
