@@ -24,13 +24,7 @@ export const Options = styled.div`
   justify-content: center;
   align-items: center;
 `;
-export const PictureLoader = styled.div`
-  width: 800px;
-  height: 600px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+export const PictureLoader = styled.canvas``;
 export const DownLoad = styled(MdDownload)`
   font-size: 2rem;
   margin-bottom: 7px;
