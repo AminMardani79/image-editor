@@ -8,7 +8,7 @@ import { LightModeContext } from "../context/LightModeContextProvider";
 const AppComponent = () => {
   const { lightMode } = useContext(LightModeContext);
   return (
-    <AppContainer className="App" lightMode={lightMode}>
+    <AppContainer className="App" lightmode={lightMode}>
       <Navbar />
       <Content />
     </AppContainer>

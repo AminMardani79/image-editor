@@ -9,7 +9,7 @@ export const ContentContainer = styled.div`
   gap: 10px;
   position: relative;
   padding: 10px;
-  background: ${(props) => props.lightMode && `url(${lightModeBg})`};
+  background: ${(props) => props.lightmode && `url(${lightModeBg})`};
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

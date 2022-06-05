@@ -16,7 +16,7 @@ const Navbar = () => {
     setLightMode((prev) => !prev);
   };
   return (
-    <NavbarContainer className={styles.navbarContainer} lightMode={lightMode}>
+    <NavbarContainer className={styles.navbarContainer} lightmode={lightMode}>
       <h2 className={styles.navbarTitle}>
         Image Editor <span>By Amin Mardani</span>
       </h2>

@@ -13,7 +13,7 @@ const Adjusment = () => {
   const { lightMode } = useContext(LightModeContext);
   return (
     <div className={styles.adjusments}>
-      <AdjusmentIcon lightMode={lightMode} />
+      <AdjusmentIcon lightmode={lightMode.toString()} />
       {state.adjusments.map((item) => {
         return <AdjusmentItem key={item.id} state={item} />;
       })}

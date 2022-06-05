@@ -4,7 +4,7 @@ import { MdDownload, MdOutlineDelete, MdInsertPhoto } from "react-icons/md";
 
 export const PictureContainer = styled.div`
   background: ${(props) =>
-    props.lightMode ? "var(--main-bg)" : `rgba(0,0,0,0.8)`};
+    props.lightmode ? "var(--main-bg)" : `rgba(0,0,0,0.8)`};
   background-position: center;
   background-size: cover;
   height: 100%;
@@ -35,29 +35,32 @@ export const DownLoad = styled(MdDownload)`
   font-size: 2rem;
   margin-bottom: 7px;
   cursor: pointer;
-  color: ${(props) => (props.lightMode ? "#2f2f2f" : "#c0c0c0")};
+  color: ${(props) => (props.lightmode === "true" ? "#2f2f2f" : "#c0c0c0")};
   transition: all 0.2s ease-in-out;
   &:hover {
-    color: ${(props) => (props.lightMode ? "var(--main-black)" : "#ffffff")};
+    color: ${(props) =>
+      props.lightmode === "true" ? "var(--main-black)" : "var(--main-white)"};
   }
 `;
 export const Delete = styled(MdOutlineDelete)`
   font-size: 2rem;
   margin-bottom: 7px;
   cursor: pointer;
-  color: ${(props) => (props.lightMode ? "#2f2f2f" : "#c0c0c0")};
+  color: ${(props) => (props.lightmode === "true" ? "#2f2f2f" : "#c0c0c0")};
   transition: all 0.2s ease-in-out;
   &:hover {
-    color: ${(props) => (props.lightMode ? "var(--main-black)" : "#ffffff")};
+    color: ${(props) =>
+      props.lightmode === "true" ? "var(--main-black)" : "var(--main-white)"};
   }
 `;
 export const Insert = styled(MdInsertPhoto)`
   font-size: 2rem;
   margin-bottom: 7px;
   cursor: pointer;
-  color: ${(props) => (props.lightMode ? "#2f2f2f" : "#c0c0c0")};
+  color: ${(props) => (props.lightmode === "true" ? "#2f2f2f" : "#c0c0c0")};
   transition: all 0.2s ease-in-out;
   &:hover {
-    color: ${(props) => (props.lightMode ? "var(--main-black)" : "#ffffff")};
+    color: ${(props) =>
+      props.lightmode === "true" ? "var(--main-black)" : "var(--main-white)"};
   }
 `;

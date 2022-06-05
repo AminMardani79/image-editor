@@ -1,6 +1,6 @@
 @import 'Config.css';
 .settingsContainer{
-    padding: 40px 30px;
+    padding: 40px 30px 0 30px;
     height: 675px;
     overflow-y: auto;
 }
@@ -15,6 +15,7 @@
 }
 .topSettings input{
     width: 100%;
+    margin: 10px 0;
 }
 .topSettings .radius{
     display: flex;

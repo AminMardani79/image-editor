@@ -15,26 +15,29 @@ import { AdjusmentContext } from "../context/AdjusmentContextProvider";
 const Settings = () => {
   const { lightMode } = useContext(LightModeContext);
   const { state, dispatch } = useContext(AdjusmentContext);
+  const {
+    radius: { min, max, name, value },
+  } = state;
   const changeHandler = (event) => {
     dispatch({ type: "RADIUS", payload: { value: event.target.value } });
   };
   return (
     <SettingContainer
       className={styles.settingsContainer}
-      lightMode={lightMode}
+      lightmode={lightMode}
     >
       <div className={styles.topSettings}>
-        <SettingsIcon lightMode={lightMode} />
+        <SettingsIcon lightmode={lightMode.toString()} />
         <div className={styles.radius}>
-          <span>{state.radius.name}</span>
+          <span className={styles.radiusTitle}>{name}</span>
           <input
             type="range"
-            min={state.radius.min}
-            max={state.radius.max}
-            value={state.radius.value}
+            min={min}
+            max={max}
+            value={value}
             onChange={changeHandler}
           />
-          <span>{state.radius.value} %</span>
+          <span className={styles.radiusValue}>{value} %</span>
         </div>
         <div className={styles.mirror}>
           <MirrorIcon onClick={() => dispatch({ type: "FLIP" })} />

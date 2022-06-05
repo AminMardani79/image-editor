@@ -6,8 +6,8 @@ import { MdToggleOff } from "react-icons/md";
 
 export const NavbarContainer = styled.div`
   background: ${(props) =>
-    props.lightMode ? "var(--main-bg)" : `rgba(0,0,0,.8)`};
-  color: ${(props) => (props.lightMode ? "#2d2d2d" : "#ffffff")};
+    props.lightmode ? "var(--main-bg)" : `rgba(0,0,0,.8)`};
+  color: ${(props) => (props.lightmode ? "#2d2d2d" : "#ffffff")};
 `;
 
 export const ToggleOn = styled(MdOutlineToggleOn)`
@@ -15,6 +15,6 @@ export const ToggleOn = styled(MdOutlineToggleOn)`
   font-size: 30px;
 `;
 export const ToggleOff = styled(MdToggleOff)`
-  color: ${(props) => (props.lightMode ? "#2d2d2d" : "#ffffff")};
+  color: ${(props) => (props.lightmode ? "#2d2d2d" : "#ffffff")};
   font-size: 30px;
 `;

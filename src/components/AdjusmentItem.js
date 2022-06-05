@@ -12,7 +12,7 @@ const AdjusmentItem = ({ state }) => {
   };
   return (
     <div className={styles.adjusmentsItem}>
-      <span>{name}</span>
+      <span className={styles.adjusmentTitle}>{name}</span>
       <input
         type="range"
         min={min}
@@ -20,7 +20,7 @@ const AdjusmentItem = ({ state }) => {
         value={value}
         onChange={changeHandler}
       />
-      <span>{value} %</span>
+      <span className={styles.adjusmentValue}>{value} %</span>
     </div>
   );
 };

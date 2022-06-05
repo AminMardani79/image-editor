@@ -15,14 +15,18 @@ import { LightModeContext } from "../context/LightModeContextProvider";
 
 const Picture = () => {
   const { lightMode } = useContext(LightModeContext);
+  const changeHandler = (e) => {
+    console.log(e);
+  };
   return (
-    <PictureContainer className={styles.pictureContainer} lightMode={lightMode}>
+    <PictureContainer className={styles.pictureContainer} lightmode={lightMode}>
       <PictureLoader></PictureLoader>
       <Options>
         <div className={styles.optionsContainer}>
-          <Insert lightMode={lightMode} />
-          <DownLoad lightMode={lightMode} />
-          <Delete lightMode={lightMode} />
+          <input type="file" onChange={changeHandler} />
+          <Insert lightmode={lightMode.toString()} />
+          <DownLoad lightmode={lightMode.toString()} />
+          <Delete lightmode={lightMode.toString()} />
         </div>
       </Options>
     </PictureContainer>

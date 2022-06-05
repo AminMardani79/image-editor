@@ -10,7 +10,7 @@ import { LightModeContext } from "../context/LightModeContextProvider";
 const Content = () => {
   const { lightMode } = useContext(LightModeContext);
   return (
-    <ContentContainer lightMode={lightMode}>
+    <ContentContainer lightmode={lightMode}>
       <Picture />
       <Settings />
     </ContentContainer>
