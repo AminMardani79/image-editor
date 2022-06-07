@@ -7,7 +7,7 @@ const initialValue = {
   radius: {
     name: "Radius",
     value: 0,
-    min: 0,
+    min: -100,
     max: 100,
   },
   adjusments: [
@@ -86,6 +86,7 @@ const adjustmentReducer = (state, action) => {
         (item) => item.id === action.payload.id
       );
       item.value = action.payload.value;
+      console.log(item.grow);
       return {
         ...state,
         adjusments: [...state.adjusments],

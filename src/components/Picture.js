@@ -24,9 +24,10 @@ const Picture = () => {
   const canvas = useRef();
   let img = new Image();
   useEffect(() => {
-    console.log(state.adjusments[0].value);
     window.Caman(`#${canvas.current.id}`, img, function () {
-      this.brightness(-1);
+      this.brightness(state.adjusments[0].value);
+      this.contrast(1);
+      this.revert(false);
       this.render();
     });
   }, [state]);
