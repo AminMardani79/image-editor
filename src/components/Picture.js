@@ -14,7 +14,7 @@ import {
 import { LightModeContext } from "../context/LightModeContextProvider";
 import { AdjusmentContext } from "../context/AdjusmentContextProvider";
 // functions
-import { CheckImage } from "../helpers/functions";
+import { CheckImage, DownLoadImage } from "../helpers/functions";
 const Picture = () => {
   // context
   const { lightMode } = useContext(LightModeContext);
@@ -26,7 +26,14 @@ const Picture = () => {
   useEffect(() => {
     window.Caman(`#${canvas.current.id}`, img, function () {
       this.brightness(state.adjusments[0].value);
-      this.contrast(1);
+      this.stackBlur(state.adjusments[1].value);
+      this.contrast(state.adjusments[2].value);
+      this.exposure(state.adjusments[3].value);
+      this.hue(state.adjusments[4].value);
+      this.saturation(state.adjusments[7].value);
+      this.noise(state.adjusments[8].value);
+      this.clip(state.adjusments[9].value);
+      this.flip();
       this.revert(false);
       this.render();
     });
@@ -54,6 +61,14 @@ const Picture = () => {
       false
     );
   };
+  const downLoadHandler = () => {
+    const fileExtension = fileName.slice(-4);
+    let newFilename;
+    if (fileExtension === ".jpg" || fileExtension === ".png") {
+      newFilename = fileName.substring(0, fileName.length - 4) + "-edited.jpg";
+    }
+    DownLoadImage(canvas, newFilename);
+  };
   return (
     <PictureContainer className={styles.pictureContainer} lightmode={lightMode}>
       <PictureLoader id="picture-canvas" ref={canvas}></PictureLoader>
@@ -61,7 +76,10 @@ const Picture = () => {
         <div className={styles.optionsContainer}>
           <input type="file" onChange={changeHandler} />
           <Insert lightmode={lightMode.toString()} />
-          <DownLoad lightmode={lightMode.toString()} />
+          <DownLoad
+            lightmode={lightMode.toString()}
+            onClick={downLoadHandler}
+          />
           <Delete lightmode={lightMode.toString()} />
         </div>
       </Options>

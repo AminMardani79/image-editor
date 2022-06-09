@@ -15,7 +15,7 @@ const initialValue = {
       id: 1,
       name: "Brightness",
       value: 0,
-      min: 0,
+      min: -100,
       max: 100,
     },
     {
@@ -29,14 +29,14 @@ const initialValue = {
       id: 3,
       name: "Contrast",
       value: 0,
-      min: 0,
+      min: -100,
       max: 100,
     },
     {
       id: 4,
-      name: "GrayScale",
+      name: "Exposure",
       value: 0,
-      min: 0,
+      min: -100,
       max: 100,
     },
     {
@@ -64,12 +64,19 @@ const initialValue = {
       id: 8,
       name: "Saturation",
       value: 0,
-      min: 0,
+      min: -100,
       max: 100,
     },
     {
       id: 9,
-      name: "Sepia",
+      name: "Noise",
+      value: 0,
+      min: 0,
+      max: 100,
+    },
+    {
+      id: 10,
+      name: "Clip",
       value: 0,
       min: 0,
       max: 100,
@@ -86,7 +93,6 @@ const adjustmentReducer = (state, action) => {
         (item) => item.id === action.payload.id
       );
       item.value = action.payload.value;
-      console.log(item.grow);
       return {
         ...state,
         adjusments: [...state.adjusments],
