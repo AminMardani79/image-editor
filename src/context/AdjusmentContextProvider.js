@@ -48,7 +48,7 @@ const initialValue = {
     },
     {
       id: 6,
-      name: "Invert",
+      name: "Sharpen",
       value: 0,
       min: 0,
       max: 100,
@@ -93,6 +93,7 @@ const adjustmentReducer = (state, action) => {
         (item) => item.id === action.payload.id
       );
       item.value = action.payload.value;
+      console.log(item.value);
       return {
         ...state,
         adjusments: [...state.adjusments],

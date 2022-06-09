@@ -27,13 +27,17 @@ const Picture = () => {
     window.Caman(`#${canvas.current.id}`, img, function () {
       this.brightness(state.adjusments[0].value);
       this.stackBlur(state.adjusments[1].value);
-      this.contrast(state.adjusments[2].value);
+      this.contrast(parseInt(state.adjusments[2].value));
       this.exposure(state.adjusments[3].value);
       this.hue(state.adjusments[4].value);
+      this.sharpen(state.adjusments[5].value);
       this.saturation(state.adjusments[7].value);
       this.noise(state.adjusments[8].value);
       this.clip(state.adjusments[9].value);
-      this.flip();
+      this.newLayer(function () {
+        this.opacity(state.adjusments[6].value);
+        this.fillColor("#d2e2df");
+      });
       this.revert(false);
       this.render();
     });
@@ -69,18 +73,25 @@ const Picture = () => {
     }
     DownLoadImage(canvas, newFilename);
   };
+  const removeHandler = () => {
+    canvas.current.remove(img);
+  };
   return (
     <PictureContainer className={styles.pictureContainer} lightmode={lightMode}>
       <PictureLoader id="picture-canvas" ref={canvas}></PictureLoader>
       <Options>
         <div className={styles.optionsContainer}>
-          <input type="file" onChange={changeHandler} />
-          <Insert lightmode={lightMode.toString()} />
+          <div className={styles.uploadContainer}>
+            <label className={styles.uploader} for="inputFile">
+              <Insert lightmode={lightMode.toString()} />
+            </label>
+            <input type="file" id="inputFile" onChange={changeHandler} />
+          </div>
           <DownLoad
             lightmode={lightMode.toString()}
             onClick={downLoadHandler}
           />
-          <Delete lightmode={lightMode.toString()} />
+          <Delete lightmode={lightMode.toString()} onClick={removeHandler} />
         </div>
       </Options>
     </PictureContainer>

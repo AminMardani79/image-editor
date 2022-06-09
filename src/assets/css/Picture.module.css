@@ -6,3 +6,15 @@
     align-items: center;
     justify-content: center;
 }
+.uploadContainer{
+    text-align: center;
+}
+.uploadContainer input{
+    visibility: hidden;
+    display: none;
+}
+.uploader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
