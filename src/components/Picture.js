@@ -14,13 +14,14 @@ import {
 import { LightModeContext } from "../context/LightModeContextProvider";
 import { AdjusmentContext } from "../context/AdjusmentContextProvider";
 // functions
-import { CheckImage, DownLoadImage } from "../helpers/functions";
+import { CheckImage, DownLoadImage, DrawImage } from "../helpers/functions";
 const Picture = () => {
   // context
   const { lightMode } = useContext(LightModeContext);
   const { state } = useContext(AdjusmentContext);
   // variables
   const [fileName, setFileName] = useState("");
+  const [fileImage, setFileImage] = useState(null);
   const canvas = useRef();
   let img = new Image();
   useEffect(() => {
@@ -41,29 +42,19 @@ const Picture = () => {
       this.revert(false);
       this.render();
     });
+    const reader = new FileReader();
+    CheckImage(fileImage) && reader.readAsDataURL(fileImage);
+    DrawImage(canvas, img, reader, state.flip);
   }, [state]);
   const changeHandler = (e) => {
-    const ctx = canvas.current.getContext("2d");
     const file = e.target.files[0];
     const reader = new FileReader();
     if (CheckImage(file)) {
       setFileName(file.name);
+      setFileImage(file);
       reader.readAsDataURL(file);
     }
-    reader.addEventListener(
-      "load",
-      () => {
-        img = new Image();
-        img.src = reader.result;
-        img.onload = function () {
-          canvas.current.width = 800;
-          canvas.current.height = 600;
-          ctx.drawImage(img, 0, 0, 800, 600);
-          canvas.current.removeAttribute("data-caman-id");
-        };
-      },
-      false
-    );
+    DrawImage(canvas, img, reader, state.flip);
   };
   const downLoadHandler = () => {
     const fileExtension = fileName.slice(-4);
@@ -82,7 +73,7 @@ const Picture = () => {
       <Options>
         <div className={styles.optionsContainer}>
           <div className={styles.uploadContainer}>
-            <label className={styles.uploader} for="inputFile">
+            <label className={styles.uploader} htmlFor="inputFile">
               <Insert lightmode={lightMode.toString()} />
             </label>
             <input type="file" id="inputFile" onChange={changeHandler} />

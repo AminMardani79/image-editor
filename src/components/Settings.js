@@ -10,23 +10,27 @@ import {
 import Adjusment from "./Adjusment";
 // context
 import { LightModeContext } from "../context/LightModeContextProvider";
-import { AdjusmentContext } from "../context/AdjusmentContextProvider";
+/* import { AdjusmentContext } from "../context/AdjusmentContextProvider"; */
 
 const Settings = () => {
   const { lightMode } = useContext(LightModeContext);
-  const { state, dispatch } = useContext(AdjusmentContext);
+  /*   const { state, dispatch } = useContext(AdjusmentContext);
   const {
     radius: { min, max, name, value },
+    flip,
   } = state;
   const changeHandler = (event) => {
     dispatch({ type: "RADIUS", payload: { value: event.target.value } });
   };
+  const flipHandler = () => {
+    dispatch({ type: "FLIP" });
+  }; */
   return (
     <SettingContainer
       className={styles.settingsContainer}
       lightmode={lightMode}
     >
-      <div className={styles.topSettings}>
+      {/* <div className={styles.topSettings}>
         <SettingsIcon lightmode={lightMode.toString()} />
         <div className={styles.radius}>
           <span className={styles.radiusTitle}>{name}</span>
@@ -40,9 +44,9 @@ const Settings = () => {
           <span className={styles.radiusValue}>{value} %</span>
         </div>
         <div className={styles.mirror}>
-          <MirrorIcon onClick={() => dispatch({ type: "FLIP" })} />
+          <MirrorIcon onClick={flipHandler} />
         </div>
-      </div>
+      </div> */}
       <Adjusment />
     </SettingContainer>
   );
