@@ -13,6 +13,11 @@ export const PictureContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 992px) {
+    height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+  }
 `;
 export const Options = styled.div`
   position: absolute;
@@ -23,6 +28,12 @@ export const Options = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 992px) {
+    align-items: flex-start;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 `;
 export const PictureLoader = styled.canvas``;
 export const DownLoad = styled(MdDownload)`

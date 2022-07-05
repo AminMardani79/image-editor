@@ -18,3 +18,13 @@
     justify-content: center;
     align-items: center;
 }
+@media screen and (max-width: 992px) {
+    .optionsContainer{
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    .optionsContainer svg{
+        display: inline-block;
+        margin: 0 5px;
+    }
+}

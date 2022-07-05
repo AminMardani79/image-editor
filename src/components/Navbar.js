@@ -22,7 +22,7 @@ const Navbar = () => {
       </h2>
       <div className={styles.toggleMode}>
         <div className={styles.modeTitle}>
-          <span>Light Mode</span>
+          <span>{lightMode ? "Light" : "Dark"} Mode</span>
         </div>
         <div className={styles.modeIcons} onClick={toggleHandler}>
           {lightMode ? <ToggleOn /> : <ToggleOff />}

@@ -13,4 +13,8 @@ export const ContentContainer = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  @media screen and (max-width: 992px) {
+    grid-template-columns: auto;
+    height: 100%;
+  }
 `;
