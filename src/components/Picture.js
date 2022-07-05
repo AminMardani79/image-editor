@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
+import throttle from "lodash/throttle";
 // styles
 import styles from "../assets/css/Picture.module.css";
 // components
@@ -14,38 +15,83 @@ import {
 import { LightModeContext } from "../context/LightModeContextProvider";
 import { AdjusmentContext } from "../context/AdjusmentContextProvider";
 // functions
-import { CheckImage, DownLoadImage, DrawImage } from "../helpers/functions";
+import { CheckImage, DownLoadImage } from "../helpers/functions";
+import { click } from "@testing-library/user-event/dist/click";
+const caman = window.Caman;
+
+// variables
+let isRendering = false;
+let prevRenderList = {},
+  curRenderList = {};
+let backlog = 0;
+let updateImgFn = () => {};
+
+const throttledEventListen = throttle(
+  (curRenderList) => updateImgFn(curRenderList),
+  1000
+);
+caman.Event.listen("processStart", (job) => {
+  isRendering = true;
+});
+caman.Event.listen("processComplete", (job) => {
+  isRendering = false;
+  backlog = 0;
+  if (JSON.stringify(prevRenderList) !== JSON.stringify(curRenderList)) {
+    throttledEventListen(curRenderList);
+  }
+});
+const htmlCanvas = "#picture-canvas";
+caman(htmlCanvas, function () {
+  this.render();
+});
 const Picture = () => {
   // context
   const { lightMode } = useContext(LightModeContext);
-  const { state } = useContext(AdjusmentContext);
+  const { filterList, setFilterList } = useContext(AdjusmentContext);
   // variables
   const [fileName, setFileName] = useState("");
   const [fileImage, setFileImage] = useState(null);
   const canvas = useRef();
   let img = new Image();
-  useEffect(() => {
-    window.Caman(`#${canvas.current.id}`, img, function () {
-      this.brightness(state.adjusments[0].value);
-      this.stackBlur(state.adjusments[1].value);
-      this.contrast(parseInt(state.adjusments[2].value));
-      this.exposure(state.adjusments[3].value);
-      this.hue(state.adjusments[4].value);
-      this.sharpen(state.adjusments[5].value);
-      this.saturation(state.adjusments[7].value);
-      this.noise(state.adjusments[8].value);
-      this.clip(state.adjusments[9].value);
-      this.newLayer(function () {
-        this.opacity(state.adjusments[6].value);
-        this.fillColor("#d2e2df");
-      });
+  const updateImage = (adjustmentList) => {
+    prevRenderList = adjustmentList;
+    caman(htmlCanvas, function () {
       this.revert(false);
+      for (const filter in adjustmentList) {
+        if (this[filter]) {
+          this[filter](adjustmentList[filter]);
+        } else {
+          console.log(`~${filter}~ is not a valid filter.`);
+        }
+      }
       this.render();
     });
-    const reader = new FileReader();
-    CheckImage(fileImage) && reader.readAsDataURL(fileImage);
-    DrawImage(canvas, img, reader, state.flip);
-  }, [state]);
+  };
+  updateImgFn = updateImage; // Save function so Caman Event listener can call it
+  const throttled = useRef(
+    throttle((curRenderList) => updateImage(curRenderList), 100)
+  );
+  useEffect(() => {
+    // Check for invalid filters
+    let filters = { ...filterList };
+    for (const filter in filterList) {
+      if (!caman.prototype[filter]) {
+        delete filters[filter];
+        setFilterList(filters);
+      }
+    }
+    curRenderList = filters;
+    if (JSON.stringify(prevRenderList) !== JSON.stringify(filters)) {
+      if (!isRendering) {
+        if (backlog) {
+          isRendering = true;
+        }
+        throttled.current(filters); // Throttled calls updateImage()
+        backlog += 1;
+      }
+    }
+  }, [filterList]);
+
   const changeHandler = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -54,8 +100,35 @@ const Picture = () => {
       setFileImage(file);
       reader.readAsDataURL(file);
     }
-    DrawImage(canvas, img, reader, state.flip);
+    SetImage(reader);
   };
+  const clickHandler = (e) => {
+    e.target.value = null;
+  };
+  const SetImage = (reader) => {
+    const ctx = canvas.current.getContext("2d");
+    reader.addEventListener(
+      "load",
+      () => {
+        img = new Image();
+        img.src = reader.result;
+        img.onload = function () {
+          updateCanvas(img, ctx);
+        };
+      },
+      false
+    );
+  };
+  const updateCanvas = (img, ctx) => {
+    canvas.current.width = 800;
+    canvas.current.height = 600;
+    ctx.save();
+    ctx.drawImage(img, 0, 0, 800, 600);
+    ctx.restore();
+    canvas.current.removeAttribute("data-caman-id");
+    updateImage(curRenderList);
+  };
+
   const downLoadHandler = () => {
     const fileExtension = fileName.slice(-4);
     let newFilename;
@@ -65,7 +138,9 @@ const Picture = () => {
     DownLoadImage(canvas, newFilename);
   };
   const removeHandler = () => {
-    canvas.current.remove(img);
+    const ctx = canvas.current.getContext("2d");
+    ctx.clearRect(0, 0, canvas.current.width, canvas.current.height);
+    img.src = "";
   };
   return (
     <PictureContainer className={styles.pictureContainer} lightmode={lightMode}>
@@ -76,7 +151,12 @@ const Picture = () => {
             <label className={styles.uploader} htmlFor="inputFile">
               <Insert lightmode={lightMode.toString()} />
             </label>
-            <input type="file" id="inputFile" onChange={changeHandler} />
+            <input
+              type="file"
+              id="inputFile"
+              onChange={changeHandler}
+              onClick={clickHandler}
+            />
           </div>
           <DownLoad
             lightmode={lightMode.toString()}
