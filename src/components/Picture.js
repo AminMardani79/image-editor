@@ -10,6 +10,7 @@ import {
   DownLoad,
   Delete,
   Insert,
+  Reset,
 } from "./Elements/PictureElements";
 // context
 import { LightModeContext } from "../context/LightModeContextProvider";
@@ -60,6 +61,7 @@ const Picture = () => {
   let img = new Image();
   const updateImage = (adjustmentList) => {
     prevRenderList = adjustmentList;
+    console.log(adjustmentList);
     caman(htmlCanvas, function () {
       this.revert(false);
       for (const filter in adjustmentList) {
@@ -134,7 +136,9 @@ const Picture = () => {
     canvas.current.removeAttribute("data-caman-id");
     updateImage(curRenderList);
   };
-
+  const resetHandler = () => {
+    setFilterList({});
+  };
   const downLoadHandler = () => {
     const fileExtension = fileName.slice(-4);
     let newFilename;
@@ -146,7 +150,6 @@ const Picture = () => {
   const removeHandler = () => {
     const ctx = canvas.current.getContext("2d");
     ctx.clearRect(0, 0, canvas.current.width, canvas.current.height);
-    img.src = "";
   };
   return (
     <PictureContainer className={styles.pictureContainer} lightmode={lightMode}>
@@ -172,6 +175,7 @@ const Picture = () => {
             lightmode={lightMode.toString()}
             onClick={downLoadHandler}
           />
+          <Reset lightmode={lightMode.toString()} onClick={resetHandler} />
           <Delete lightmode={lightMode.toString()} onClick={removeHandler} />
         </div>
       </Options>
