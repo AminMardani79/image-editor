@@ -15,8 +15,7 @@ import {
 import { LightModeContext } from "../context/LightModeContextProvider";
 import { AdjusmentContext } from "../context/AdjusmentContextProvider";
 // functions
-import { CheckImage, DownLoadImage } from "../helpers/functions";
-import { click } from "@testing-library/user-event/dist/click";
+import { CheckImage, DownLoadImage, SetSize } from "../helpers/functions";
 const caman = window.Caman;
 
 // variables
@@ -25,7 +24,13 @@ let prevRenderList = {},
   curRenderList = {};
 let backlog = 0;
 let updateImgFn = () => {};
-
+let width = window.innerWidth;
+let height = window.innerHeight;
+// end variables
+window.onresize = () => {
+  width = window.innerWidth;
+  height = window.innerHeight;
+};
 const throttledEventListen = throttle(
   (curRenderList) => updateImgFn(curRenderList),
   1000
@@ -61,7 +66,7 @@ const Picture = () => {
         if (this[filter]) {
           this[filter](adjustmentList[filter]);
         } else {
-          console.log(`~${filter}~ is not a valid filter.`);
+          console.log(`${filter} is not a valid filter.`);
         }
       }
       this.render();
@@ -120,10 +125,11 @@ const Picture = () => {
     );
   };
   const updateCanvas = (img, ctx) => {
-    canvas.current.width = 800;
-    canvas.current.height = 600;
+    const { canvasHeight, canvasWidth } = SetSize(width, height);
+    canvas.current.width = canvasWidth;
+    canvas.current.height = canvasHeight;
     ctx.save();
-    ctx.drawImage(img, 0, 0, 800, 600);
+    ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight);
     ctx.restore();
     canvas.current.removeAttribute("data-caman-id");
     updateImage(curRenderList);
@@ -144,7 +150,11 @@ const Picture = () => {
   };
   return (
     <PictureContainer className={styles.pictureContainer} lightmode={lightMode}>
-      <PictureLoader id="picture-canvas" ref={canvas}></PictureLoader>
+      <PictureLoader
+        id="picture-canvas"
+        className={styles.pictureCanvas}
+        ref={canvas}
+      ></PictureLoader>
       <Options>
         <div className={styles.optionsContainer}>
           <div className={styles.uploadContainer}>

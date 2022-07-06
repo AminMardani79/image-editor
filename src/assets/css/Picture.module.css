@@ -18,6 +18,8 @@
     justify-content: center;
     align-items: center;
 }
+.pictureCanvas{
+}
 @media screen and (max-width: 992px) {
     .optionsContainer{
         flex-direction: row;
