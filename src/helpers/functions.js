@@ -12,12 +12,16 @@ export const DownLoadImage = (canvas, filename) => {
 };
 export const SetSize = (width, height) => {
   let canvasWidth = width * 0.5;
-  let canvasHeight = (height * 5) / 7;
-  if (width < 550) {
+  let canvasHeight = (height * 6) / 7;
+  if (width < 390) {
     canvasHeight = (height * 1) / 2;
-    canvasWidth = (width * 2) / 3;
+    canvasWidth = (width * 7) / 8;
+  } else if (width < 550) {
+    canvasHeight = (height * 2) / 3;
+    canvasWidth = (width * 4) / 5;
   } else if (width < 992) {
     canvasWidth = (width * 2) / 3;
+    canvasHeight = (height * 5) / 7;
   }
   return { canvasHeight, canvasWidth };
 };

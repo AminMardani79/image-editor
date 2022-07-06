@@ -35,3 +35,22 @@
     align-items: center;
     cursor: pointer;
 }
+@media screen and (max-width: 992px) {
+    .navbarTitle{
+        font-size: 20px;
+    }
+    .navbarTitle span{
+        font-size: 11px;
+    }
+    .toggleMode .modeTitle span{
+        font-size: 13px;
+    }
+}
+@media screen and (max-width: 490px) {
+    .navbarTitle{
+        font-size: 18px;
+    }
+    .toggleMode .modeTitle{
+        display: none;
+    }
+}
